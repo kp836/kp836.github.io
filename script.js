@@ -123,4 +123,5 @@ function portfolioItemDetails(portfolioItem){
     portfolioItem.querySelector(".portfolio-item-details").innerHTML;
 }
 
+
 /* ---------- Toggle Navbar ----------- */
