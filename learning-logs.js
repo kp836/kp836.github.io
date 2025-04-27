@@ -1,4 +1,5 @@
 let logs = [];
+const postContent = document.getElementById('post-content');
 let currentIndex = 0;
 
 // Fetch the list of logs
@@ -42,22 +43,41 @@ function renderPostList() {
         });
     }
 
-// Lod full post
+// Load full post
 function loadPost(index) {
     const post = logs[index];
+
+    // Fetch the actual markdown content
     fetch(`learning-logs/${post.file}`)
         .then(res => res.text())
         .then(markdown => {
             const cleanMarkdown = removeFrontMatter(markdown);
-            const html = marked.parse(cleanMarkdown);
-            document.getElementById('post-content').innerHTML = `
-                <h2>${post.title}</h2>
-                <p><strong>Category:</strong> ${post.category} | <strong>Date:</strong> ${post.date}</p>
-                <div>${html}</div>
-            `;
-            currentIndex = index;
+            const htmlContent = marked.parse(cleanMarkdown); // Convert markdown to HTML
+
+            // Switch views
             document.getElementById('post-list-view').style.display = 'none';
             document.getElementById('single-post-view').style.display = 'block';
+
+            postContent.innerHTML = `
+                <h2>${post.title}</h2>
+                <div class="post-meta">${post.category} | ${post.date}</div>
+                <div class="post-body">${htmlContent}</div>
+                <div class="nav-buttons">
+                    <button id="prev-btn">Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+            `;
+
+            // Update currentIndex
+            currentIndex = index;
+
+            // Add listeners for navigation buttons inside post
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                if (currentIndex > 0) loadPost(currentIndex - 1);
+            });
+            document.getElementById('next-btn').addEventListener('click', () => {
+                if (currentIndex < logs.length - 1) loadPost(currentIndex + 1);
+            });
         });
 }
 
@@ -76,20 +96,6 @@ function generatePreview(markdown) {
 document.getElementById('back-to-list').addEventListener('click', () => {
     document.getElementById('post-list-view').style.display = 'block';
     document.getElementById('single-post-view').style.display = 'none';
-});
-
-// Button: Previous Post
-document.getElementById('prev-post').addEventListener('click', () => {
-    if (currentIndex > 0) {
-        loadPost(currentIndex - 1);
-    }
-});
-
-// Button: Next Post
-document.getElementById('next-post').addEventListener('click', () => {
-    if (currentIndex < logs.length - 1) {
-        loadPost(currentIndex + 1);
-    }
 });
 
 // Theme toggle
@@ -115,23 +121,6 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-mode');
         toggleButton.textContent = 'Light Mode';
     }
-});
-
-function updateButtons() {
-  document.getElementById('prev-btn').disabled = currentIndex === 0;
-  document.getElementById('next-btn').disabled = currentIndex === logs.length - 1;
-}
-
-document.getElementById('prev-btn').addEventListener('click', () => {
-  if (currentIndex > 0) {
-    fadeOutAndShow(currentIndex - 1);
-  }
-});
-
-document.getElementById('next-btn').addEventListener('click', () => {
-  if (currentIndex < logs.length - 1) {
-    fadeOutAndShow(currentIndex + 1);
-  }
 });
 
 function fadeOutAndShow(newIndex) {

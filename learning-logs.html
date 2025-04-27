@@ -18,17 +18,19 @@
 <body>
   <h1>Learning Logs</h1>
 
+
+
   <!-- Post Live View -->
    <div id="post-list-view">
+    <button id="theme-toggle">Toggle Theme</button>
     <div id="log-list" class="post-list"></div>
+
    </div>
 
    <!-- Single Post View -->
     <div id="single-post-view" style="display: none;">
         <div id="post-content"></div>
         <div class="post-navigation">
-            <button id="prev-post">Previous</button>
-            <button id="next-post">Next</button>
             <button id="back-to-list">Back to List</button>
         </div>
     </div>
@@ -125,6 +127,19 @@
     #back-to-list {
         margin-bottom: 20px;
         padding: 8px 12px;
+    }
+
+    /* Animations */
+    .fade-out {
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .fade-in {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
   </style>
   
