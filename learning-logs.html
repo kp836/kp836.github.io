@@ -3,14 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <title>Learning Logs</title>
-  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    #log-container {
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    #log-container.fade-out {
+        opacity: 0;
+    }
+  </style>
 </head>
 <body>
   <h1>Learning Logs</h1>
-  <div id="log-container"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="learning-logs.js"></script>
 
+
+  <!-- Post Live View -->
+   <div id="post-list-view">
+    <button id="theme-toggle">Toggle Theme</button>
+    <div id="log-list" class="post-list"></div>
+
+   </div>
+
+   <!-- Single Post View -->
+    <div id="single-post-view" style="display: none;">
+        <div id="post-content"></div>
+        <div class="post-navigation">
+            <button id="back-to-list">Back to List</button>
+        </div>
+    </div>
+
+  <style>
+    body {
+        background-color: #ffffff;
+        color: #222222;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+        background-color: #121212;
+        color: #eeeeee;
+    }
+
+    .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #ddd;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+        background-color: #bbb;
+    }
+
+    #log-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .post-card {
+        width: 300px;
+        padding: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        background: var(--card-background);
+        box-shadow: var(--box-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--hover-shadow);
+    }
+
+    .post-preview {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        pointer-events: none;
+    }
+
+    .post-card:hover .post-preview {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .read-more-button {
+        margin-top: 10px;
+        padding: 8px 12px;
+        background: var(--button-background);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #single-post-view {
+        padding: 20px;
+    }
+    
+    .post-navigation {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #back-to-list {
+        margin-bottom: 20px;
+        padding: 8px 12px;
+    }
+
+    /* Animations */
+    .fade-out {
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .fade-in {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+  </style>
+  
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="learning-logs.js"></script>
 </body>
 </html>

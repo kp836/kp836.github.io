@@ -5,6 +5,34 @@
       "category": "Introduction",
       "tags": ["Learning Journey", "Growth Mindset", "Portfolio"],
       "file": "logs/introduction.md"
+    },
+    {
+      "file": "logs/frontend-basics.md",
+      "title": "Frontend Basics",
+      "date": "2025-04-27",
+      "category": "Frontend Development",
+      "tags": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "file": "logs/networking-foundations.md",
+      "title": "Networking Foundations",
+      "date": "2025-04-28",
+      "category": "Networking",
+      "tags": ["TCP/IP", "Subnets", "OSI Model"]
+    },
+    {
+        "file": "logs/git-commands.md",
+        "title": "Essential Git Commands",
+        "date": "2025-04-23",
+        "category": "Version Control",
+        "tags": ["Git", "Version Control"]
+    },
+    {
+        "file": "logs/linux-commands.md",
+        "title": "Linux Commands Every IT Person Should Know",
+        "date": "2025-04-22",
+        "category": "Operating Systems",
+        "tags": ["Linux", "Command Line"]
     }
   ]
   
