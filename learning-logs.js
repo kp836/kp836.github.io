@@ -98,6 +98,20 @@ document.getElementById('back-to-list').addEventListener('click', () => {
     document.getElementById('single-post-view').style.display = 'none';
 });
 
+// Button: Previous Post
+document.getElementById('prev-post').addEventListener('click', () => {
+    if (currentIndex > 0) {
+        loadPost(currentIndex - 1);
+    }
+});
+
+// Button: Next Post
+document.getElementById('next-post').addEventListener('click', () => {
+    if (currentIndex < logs.length - 1) {
+        loadPost(currentIndex + 1);
+    }
+});
+
 // Theme toggle
 const toggleButton = document.getElementById('theme-toggle');
 
